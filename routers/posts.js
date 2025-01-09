@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const posts =require("../data/posts.js")
+
 const postsController = require("../controllers/postscontroller.js")
 
 
