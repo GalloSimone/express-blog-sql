@@ -3,12 +3,13 @@ const connection = require('../db/db.js');
 
 
 //INDEX
-
 function index (req,res) {
     const sql='SELECT * FROM `posts`';
 
     connection.query(sql,(err,results)=>{
         console.log(results);
+        res.json((results))
+        
     })
 
 
@@ -58,11 +59,25 @@ function show (req,res) {
 //DESTROY
  function destroy (req,res){
  const id = parseInt (req.params.id);
-  const eliminato =posts.find((post,index) =>post.id===id);
+const sql ='DELETE FROM `posts` WHERE `id` = ?';
+ connection.query(sql,[id],(err)=>{
+    if (err){  
+        console.log(err);
+        
+        return res.status(500).json({ error: 'processo fallito' });
+    }
+        res.sendStatus(204)
+    
+ })
+
+
+
+
+  /**const eliminato =posts.find((post,index) =>post.id===id);
   console.log( "Elemento eliminato: ", eliminato);
  posts.splice(posts.indexOf(eliminato), 1);
  res.sendStatus(204);
- console.log("Lista aggiornata: ", posts);
+ console.log("Lista aggiornata: ", posts);*/
  }
 
  module.exports = {index,show,store,update,destroy};
