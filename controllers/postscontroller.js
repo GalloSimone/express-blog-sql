@@ -5,7 +5,16 @@ const connection = require('../db/db.js');
 //INDEX
 
 function index (req,res) {
-    res.json({message:"lista dei post", posts, postsCount: posts.length})
+    const sql='SELECT * FROM `posts`';
+
+    connection.query(sql,(err,results)=>{
+        console.log(results);
+    })
+
+
+
+
+    //res.json({message:"lista dei post", posts, postsCount: posts.length})
 }
 
 //SHOW
